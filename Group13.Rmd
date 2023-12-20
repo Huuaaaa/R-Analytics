@@ -1,0 +1,42 @@
+---
+title: "Group13"
+author: "Joshua Somosera, Aaron Joshua Tolentino, Austine John Calatana"
+date: "2023-12-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r reviews}
+install.packages("rvest")
+library(rvest)
+url <- "https://www.amazon.com/Jschlatt-Ram-Plushie-Youtooz-Collection/dp/B09KNZZL5L/ref=sr_1_1_sspa?crid=2N7JGJ9O8G6SO&keywords=jschlatt+plush&qid=1703082062&sprefix=jsclhatt+plus%2Caps%2C438&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
+url
+data_scrape <- read_html(url)
+```
+```{r d1}
+username <- data_scrape %>%
+  html_nodes(".a-profile-name") %>%
+  html_text()
+
+ratings <- data_scrape %>%
+  html_nodes(".review-rating") %>%
+  html_text()
+reviews <- data_scrape %>%
+  html_nodes(".review-text-content span") %>%
+  html_text()
+
+
+print(username)
+print(ratings)
+print(reviews)
+
+```
